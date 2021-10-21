@@ -29,7 +29,7 @@ function sendMessage() {
 }
 
 function addMessage(message) {
-    $("#chat").append("<tr><td>" + message.text + "</td></tr>");
+    $("#chat").append("<tr><td>" + message.name + "</td><td>" + message.text + "</td></tr>");
 }
 
 $(function () {
@@ -37,8 +37,8 @@ $(function () {
         e.preventDefault();
     });
     connect();
-    $( "#send" ).click(
-        function() {
+    $("#send").click(
+        function () {
             sendMessage();
         }
     );
