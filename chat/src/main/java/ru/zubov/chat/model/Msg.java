@@ -1,4 +1,4 @@
-package ru.zubov.ph.model;
+package ru.zubov.chat.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
