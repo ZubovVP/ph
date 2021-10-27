@@ -1,9 +1,9 @@
 package ru.zubov.chat.controler;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.zubov.chat.model.Email;
-import ru.zubov.chat.mail.ReadWriteEmailAble;
 import ru.zubov.chat.service.EmailService;
 
 import java.util.List;
@@ -29,15 +29,14 @@ public class EmailController {
         return this.readerWriterMail.readAllMessages();
     }
 
-    @GetMapping("/last")
-    public List<Email> readLastMessage() {
-        return this.readerWriterMail.readLastMessage(10);
+    @GetMapping("/last/{count}")
+    public List<Email> readLastMessage(@PathVariable int count) {
+        return this.readerWriterMail.readLastMessage(count);
     }
 
-//    @PostMapping("/send")
-//    public ResponseEntity<Void> checkEmail(@RequestBody Notification notification) {
-//        boolean result = this.es.write(notification);
-//        return result ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
-//
-//    }
+
+    @GetMapping("/readNew")
+    public List<Email> readOnlyNewMessage(){
+        return this.readerWriterMail.readOnlyNewMessage();
+    }
 }

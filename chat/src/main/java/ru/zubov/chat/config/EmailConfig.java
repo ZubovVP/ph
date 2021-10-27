@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import ru.zubov.chat.mail.ReadWriteEmailAble;
 import ru.zubov.chat.mail.ReaderWriterMail;
 
 import java.util.Properties;
@@ -42,8 +43,16 @@ public class EmailConfig {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
-
         return mailSender;
+    }
+
+
+    @Bean
+    public ReadWriteEmailAble getReadWriteEmailAble(@Value("${spring.mail.pop3.host}") String host,
+                                                    @Value("${spring.mail.username}") String email,
+                                                    @Value("${spring.mail.password}") String pwd,
+                                                    @Qualifier("createRearWriterEmailForGmail") JavaMailSender sender) {
+        return new ReaderWriterMail(host, email, pwd, sender);
     }
 
 }
